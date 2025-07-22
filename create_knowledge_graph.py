@@ -1,10 +1,16 @@
 from biocypher import BioCypher, FileDownload
-from template_package.adapters.example_adapter import (
-    ExampleAdapter,
-    ExampleAdapterNodeType,
-    ExampleAdapterEdgeType,
-    ExampleAdapterProteinField,
-    ExampleAdapterDiseaseField,
+# from template_package.adapters.example_adapter import (
+#     ExampleAdapter,
+#     ExampleAdapterNodeType,
+#     ExampleAdapterEdgeType,
+#     ExampleAdapterProteinField,
+#     ExampleAdapterDiseaseField,
+# )
+from template_package.adapters.adapter_syntetic_data import (
+    Adapter,
+    AdapterNodeType,
+    AdapterProteinField,
+    AdapterEdgeType
 )
 
 # Instantiate the BioCypher interface
@@ -26,39 +32,58 @@ print(paths)
 # Choose node types to include in the knowledge graph.
 # These are defined in the adapter (`adapter.py`).
 node_types = [
-    ExampleAdapterNodeType.PROTEIN,
-    ExampleAdapterNodeType.DISEASE,
+    # ExampleAdapterNodeType.PROTEIN,
+    # ExampleAdapterNodeType.DISEASE,
+    AdapterNodeType.PROTEIN
 ]
 
 # Choose protein adapter fields to include in the knowledge graph.
 # These are defined in the adapter (`adapter.py`).
 node_fields = [
     # Proteins
-    ExampleAdapterProteinField.ID,
-    ExampleAdapterProteinField.SEQUENCE,
-    ExampleAdapterProteinField.DESCRIPTION,
-    ExampleAdapterProteinField.TAXON,
-    # Diseases
-    ExampleAdapterDiseaseField.ID,
-    ExampleAdapterDiseaseField.NAME,
-    ExampleAdapterDiseaseField.DESCRIPTION,
+    # ExampleAdapterProteinField.ID,
+    # ExampleAdapterProteinField.SEQUENCE,
+    # ExampleAdapterProteinField.DESCRIPTION,
+    # ExampleAdapterProteinField.TAXON,
+    # # Diseases
+    # ExampleAdapterDiseaseField.ID,
+    # ExampleAdapterDiseaseField.NAME,
+    # ExampleAdapterDiseaseField.DESCRIPTION,
+
+    AdapterProteinField.ID,
+    AdapterProteinField.PREFERRED_ID,
+    AdapterProteinField.GENESYMBOL,
+    AdapterProteinField.NCBI_TAX_ID
 ]
 
 edge_types = [
-    ExampleAdapterEdgeType.PROTEIN_PROTEIN_INTERACTION,
-    ExampleAdapterEdgeType.PROTEIN_DISEASE_ASSOCIATION,
+    # ExampleAdapterEdgeType.PROTEIN_PROTEIN_INTERACTION,
+    # ExampleAdapterEdgeType.PROTEIN_DISEASE_ASSOCIATION,
+    AdapterEdgeType.PROTEIN_PROTEIN_INTERACTION
 ]
 
 # Create a protein adapter instance
-adapter = ExampleAdapter(
+# adapter = ExampleAdapter(
+#     node_types=node_types,
+#     node_fields=node_fields,
+#     edge_types=edge_types,
+#     # we can leave edge fields empty, defaulting to all fields in the adapter
+# )
+adapter = Adapter(
     node_types=node_types,
     node_fields=node_fields,
     edge_types=edge_types,
-    # we can leave edge fields empty, defaulting to all fields in the adapter
 )
 
 
 # Create a knowledge graph from the adapter
+# delete from
+# for _id, _type, _props in peekable(adapter.get_nodes()):
+#     # bc._translator._get_ontology_mapping(_type)
+#     print(_id, _type, _props)
+# for _id, _src, _tar, _type, _props in peekable(adapter.get_edges()):
+#     print(_id, _src, _tar, _type, _props)
+# to here
 bc.write_nodes(adapter.get_nodes())
 bc.write_edges(adapter.get_edges())
 
