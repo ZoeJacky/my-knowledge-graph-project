@@ -29,6 +29,11 @@ class AdapterEdgeType(Enum):
     """
 
     PROTEIN_PROTEIN_INTERACTION = "protein_protein_interaction"
+    BINDING = "binding"
+    ACTIVATION = "activation"
+    PHOSPHORYLATION = "phosphorylation"
+    UBIQUITINATION = "ubiquitination"
+    INHIBITION = "inhibition"
 
 class AdapterProteinProteinEdgeField(Enum):
     """
@@ -94,14 +99,14 @@ class Adapter:
             raise ValueError("CSV must contain 'source' and 'target' columns.")
         else:
             edge_tuples = [
-                (source + target, source, target, AdapterEdgeType.PROTEIN_PROTEIN_INTERACTION.value,
+                (source + target, source, target, type,
                  {'is_stimulation': is_stimulation, 'is_inhibition': is_inhibition,
                   'consensus_direction': consensus_direction,
                   'consensus_stimulation': consensus_stimulation,
                   'consensus_inhibition': consensus_inhibition})
                 for
-                source, target, is_stimulation, is_inhibition, consensus_direction, consensus_stimulation, consensus_inhibition
-                in zip(df['source'], df['target'], df['is_stimulation'], df['is_inhibition'],
+                source, target, type, is_stimulation, is_inhibition, consensus_direction, consensus_stimulation, consensus_inhibition
+                in zip(df['source'], df['target'], df['type'], df['is_stimulation'], df['is_inhibition'],
                        df['consensus_direction'],
                        df['consensus_stimulation'], df['consensus_inhibition'], )
 

@@ -24,6 +24,36 @@ protein protein interaction:
 
 #    use_id: false
 
+binding:
+    is_a: protein protein interaction
+    inherit_properties: true
+    represented_as: edge
+    input_label: binding
+
+activation:
+    is_a: protein protein interaction
+    inherit_properties: true
+    represented_as: edge
+    input_label: activation
+
+phosphorylation:
+    is_a: protein protein interaction
+    inherit_properties: true
+    represented_as: edge
+    input_label: phosphorylation
+
+ubiquitination:
+    is_a: protein protein interaction
+    inherit_properties: true
+    represented_as: edge
+    input_label: ubiquitination
+
+inhibition:
+    is_a: protein protein interaction
+    inherit_properties: true
+    represented_as: edge
+    input_label: inhibition
+
 #protein to disease association:
 #    is_a: association
 #    represented_as: edge

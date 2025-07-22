@@ -59,7 +59,12 @@ node_fields = [
 edge_types = [
     # ExampleAdapterEdgeType.PROTEIN_PROTEIN_INTERACTION,
     # ExampleAdapterEdgeType.PROTEIN_DISEASE_ASSOCIATION,
-    AdapterEdgeType.PROTEIN_PROTEIN_INTERACTION
+    AdapterEdgeType.PROTEIN_PROTEIN_INTERACTION,
+    AdapterEdgeType.BINDING,
+    AdapterEdgeType.ACTIVATION,
+    AdapterEdgeType.PHOSPHORYLATION,
+    AdapterEdgeType.UBIQUITINATION,
+    AdapterEdgeType.INHIBITION
 ]
 
 # Create a protein adapter instance
@@ -77,13 +82,6 @@ adapter = Adapter(
 
 
 # Create a knowledge graph from the adapter
-# delete from
-# for _id, _type, _props in peekable(adapter.get_nodes()):
-#     # bc._translator._get_ontology_mapping(_type)
-#     print(_id, _type, _props)
-# for _id, _src, _tar, _type, _props in peekable(adapter.get_edges()):
-#     print(_id, _src, _tar, _type, _props)
-# to here
 bc.write_nodes(adapter.get_nodes())
 bc.write_edges(adapter.get_edges())
 
